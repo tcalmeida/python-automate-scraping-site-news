@@ -18,9 +18,12 @@ links = []
 for container in containers:
 
     title = container.find_element(by='xpath', value='./h5/a').text
-    titles.append(title)
+    link = container.find_element(by='xpath', value='./h5/a').get_attribute('href')
 
-news_dict = {"title": titles}
+    titles.append(title)
+    links.append(link)
+
+news_dict = {"title": titles, "links": links}
 
 recent_news = pd.DataFrame(news_dict)
 recent_news.to_csv("recent_news.csv")
