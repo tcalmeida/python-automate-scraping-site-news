@@ -1,13 +1,18 @@
 from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.common.by import By
 import pandas as pd
 
-website = "https://gamerant.com/"
-path = "geckodriver.exe"
+website = 'https://gamerant.com/'
+path = 'geckodriver.exe'
+
+#active headless-mode
+options = Options()
+options.headless = True
 
 service = Service(executable_path=path)
-driver = webdriver.Firefox(service=service)
+driver = webdriver.Firefox(service=service, options=options)
 driver.get(website)
 
 news_containers = driver.find_elements(by="xpath", value='//div[@class="w-display-card-content"]')
