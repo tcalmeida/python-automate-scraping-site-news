@@ -2,8 +2,6 @@ from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.firefox.service import Service
 import pandas as pd
-from tkinter import *
-from Grid import Grid
 
 website = 'https://gamerant.com/'
 path = 'geckodriver.exe'
@@ -16,8 +14,9 @@ service = Service(executable_path=path)
 driver = webdriver.Firefox(service=service, options=options)
 driver.get(website)
 
-news_containers = driver.find_elements(by="xpath", value='//div[@class="w-display-card-content"]')
+print('Collecting data...')
 
+news_containers = driver.find_elements(by="xpath", value='//div[@class="w-display-card-content"]')
 titles = list()
 links = list()
 
@@ -34,5 +33,3 @@ latest_news = pd.DataFrame(news_dict)
 latest_news.to_csv("gamerant.csv")
 
 driver.quit()
-
-
